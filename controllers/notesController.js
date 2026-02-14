@@ -9,7 +9,7 @@ export const createNote = async (req, res) => {
       });
 
       await newNote.save();
-      
+
       res.status(201).json({
         success: true, message : "Note created successfully",
       });
