@@ -3,10 +3,13 @@ import notes from "../models/notes.js";
 export const createNote = async (req, res) => {
     const { title, description } = req.body;
     try {
-      const newNote = await notes.create({
+      const newNote = new notes({
         title,
         description,
       });
+
+      await newNote.save();
+      
       res.status(201).json({
         success: true, message : "Note created successfully",
       });
