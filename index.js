@@ -4,10 +4,10 @@ import cors from "cors"
 import 'dotenv/config'
 import cookieParser from "cookie-parser"
 import connectDB from './config/db.js'
-import User from './models/User.js'
 import authRoutes from './routes/authRoutes.js'
 const app = express()
 
+import notesRoutes from './routes/notesRoutes.js'
 const port = process.env.PORT || 4000;
 connectDB()
 app.use(express.json())
@@ -25,6 +25,8 @@ app.get('/', (req, res) => {
 
 // API routes
 app.use('/api/auth',authRoutes)
+
+app.use('/api/notes',notesRoutes)
 
 
 app.listen(port, () => {
