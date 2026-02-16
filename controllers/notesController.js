@@ -52,3 +52,49 @@ export const getNotesbyid = async (req, res) => {
       res.status(500).json({ message: error.message });
     }
   };
+
+export const updatenotebyid = async (req, res) => {
+    // const { id } = req.params;
+    // const { title, description } = req.body;
+    // try {
+    //   const note = await notes.findById(id);
+    //   if (!note) {
+    //     return res.status(404).json({ message: "Note not found" });
+    //   }
+    //   note.title = title;
+    //   note.description = description;
+    //   await note.save();
+    //   res.status(200).json({ message: "Note updated successfully" });
+    // } catch (error) {
+    //   res.status(500).json({ message: error.message });
+    // }
+    const { id } = req.params;
+  const { title, description } = req.body;
+
+  try {
+    const note = await notes.findById(id);
+
+    if (!note) {
+      return res.status(404).json({
+        message: "Note not found kjbsfjkbjksfg",
+        success: false
+      });
+    }
+
+    note.title = title;
+    note.description = description;
+
+    await note.save();
+
+    res.status(200).json({
+      message: "Note updated successfully",
+      success: true
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+      success: false
+    });
+  }
+};
